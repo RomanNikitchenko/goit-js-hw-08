@@ -16,8 +16,6 @@ refs.form.addEventListener('submit', onFormSubmit);
 function onFormSubmit(evt) {
     evt.preventDefault();
     if (localStorage.getItem(STORAGE_kEY)) {
-        formData.email = refs.input.value;
-        formData.message = refs.textarea.value;
         console.log(formData);
     }
     evt.currentTarget.reset();
@@ -49,8 +47,7 @@ const formData = {};
 
 refs.form.addEventListener('input', throttle(createObjectString, 500));
 
-function createObjectString(e) {
-    formData[e.target.name] = e.target.value;
+function createObjectString() {
     formData.email = refs.input.value;
     formData.message = refs.textarea.value;
 

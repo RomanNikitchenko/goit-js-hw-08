@@ -1,7 +1,7 @@
 import SimpleLightbox from 'simplelightbox';
-
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
+import imageCardTemplate from '../templates/picture-card.hbs';
 import { galleryItems } from './gallery-items.js';
 
 const gallery = document.querySelector(".gallery");
@@ -9,13 +9,7 @@ const gallery = document.querySelector(".gallery");
 const cardsMarcup = createImageCardsMarcup(galleryItems);
 
 function createImageCardsMarcup(Items) {
-    return Items.map(({ preview, original, description }) => {
-        return `
-        <a class="gallery__item" href="${original}">
-            <img class="gallery__image" src="${preview}" alt="${description}"/>
-        </a>
-        `
-    }).join("");
+    return Items.map(Item => imageCardTemplate(Item)).join("");
 };
 
 gallery.insertAdjacentHTML("beforeend", cardsMarcup);
@@ -26,7 +20,6 @@ gallery.addEventListener('click', (evt) => {
     if (!evt.target.classList.contains("gallery__image")) {
         return 
     };
-
 });
 
 new SimpleLightbox('.gallery a', {
